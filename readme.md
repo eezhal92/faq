@@ -3,7 +3,7 @@
 ## Description
 A **worthless abstraction™** for frequently-asked-question. You can create a stupid bot on top of this.
 
-You can check `driver_test.go` to see the usage example
+You can check `example/bot_sample.go` to see the usage example
 
 ## Todo
 - [ ] Create cli interface
