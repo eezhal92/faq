@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func createDriver() Driver {
+func createDriver() *Driver {
 	rootQuestion := Question{
 		Text:   "mulai",
 		Answer: "apa yang ingin anda ketahui?",

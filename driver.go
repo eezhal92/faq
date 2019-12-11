@@ -8,7 +8,7 @@ type Driver struct {
 	stack        Stack
 }
 
-func NewDriver(rootQuestion Question, backCmd string, repeatCmd string, resetCmd string) Driver {
+func NewDriver(rootQuestion Question, backCmd string, repeatCmd string, resetCmd string) *Driver {
 	d := Driver{
 		RootQuestion: rootQuestion,
 		BackCmd:      backCmd,
@@ -19,7 +19,7 @@ func NewDriver(rootQuestion Question, backCmd string, repeatCmd string, resetCmd
 
 	d.stack.Push(rootQuestion)
 
-	return d
+	return &d
 }
 
 func (d *Driver) getCommandChoices() []string {
