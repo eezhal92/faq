@@ -1,8 +1,8 @@
 package faq
 
 type Reply struct {
-	Text    string
-	Choices []string
+	Text    string   `json:"text"`
+	Choices []string `json:"choices"`
 }
 
 type Question struct {
