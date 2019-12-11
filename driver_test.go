@@ -48,21 +48,21 @@ func TestFullConvoFlow(t *testing.T) {
 	assert.Equal(t, "mulai", q.Text)
 	assert.Equal(t, "apa yang ingin anda ketahui?", r.Text)
 
-	r, _ = driver.Ask("apa itu e-ktp?").(Reply)
+	r = driver.Ask("apa itu e-ktp?")
 	assert.Equal(t, "e-ktp adalah sesuatu", r.Text)
 
-	r, _ = driver.Ask("sebelumnya").(Reply)
+	r = driver.Ask("sebelumnya")
 	assert.Equal(t, "apa yang ingin anda ketahui?", r.Text)
 
-	r, _ = driver.Ask("urus e-tkp").(Reply)
+	r = driver.Ask("urus e-tkp")
 	assert.Equal(t, "dari mana anda?", r.Text)
 
-	r, _ = driver.Ask("luar palu").(Reply)
+	r = driver.Ask("luar palu")
 	assert.Equal(t, "minta surat dulu", r.Text)
 
-	r, _ = driver.Ask("ulang").(Reply)
+	r = driver.Ask("ulang")
 	assert.Equal(t, "minta surat dulu", r.Text)
 
-	r, _ = driver.Ask("kembali ke awal").(Reply)
+	r = driver.Ask("kembali ke awal")
 	assert.Equal(t, "apa yang ingin anda ketahui?", r.Text)
 }

@@ -40,7 +40,7 @@ func (d *Driver) Boot() Reply {
 	return d.RootQuestion.Reply()
 }
 
-func (d *Driver) Ask(cmd string) interface{} {
+func (d *Driver) Ask(cmd string) Reply {
 	switch cmd {
 	case d.BackCmd:
 		return d.Back()
