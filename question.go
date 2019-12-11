@@ -1,21 +1,21 @@
 package faq
 
 type Reply struct {
-	text    string
-	choices []string
+	Text    string
+	Choices []string
 }
 
 type Question struct {
-	text    string
-	answer  string
-	choices []Question
+	Text    string
+	Answer  string
+	Choices []Question
 }
 
 func (q *Question) getChoicesText() []string {
 	texts := make([]string, 0)
 
-	for _, choice := range q.choices {
-		texts = append(texts, choice.text)
+	for _, choice := range q.Choices {
+		texts = append(texts, choice.Text)
 	}
 
 	return texts
@@ -24,8 +24,8 @@ func (q *Question) getChoicesText() []string {
 func (q *Question) findChoiceQuestion(text string) Question {
 	var found Question
 
-	for _, choice := range q.choices {
-		if choice.text == text {
+	for _, choice := range q.Choices {
+		if choice.Text == text {
 			found = choice
 			break
 		}
@@ -35,12 +35,12 @@ func (q *Question) findChoiceQuestion(text string) Question {
 }
 
 func (q *Question) HasChoices() bool {
-	return len(q.choices) > 0
+	return len(q.Choices) > 0
 }
 
 func (q *Question) Ask(text string) interface{} {
 	if !q.HasChoices() {
-		return q.answer
+		return q.Answer
 	}
 
 	return q.findChoiceQuestion(text)
@@ -48,7 +48,7 @@ func (q *Question) Ask(text string) interface{} {
 
 func (q *Question) Reply() Reply {
 	return Reply{
-		text:    q.answer,
-		choices: q.getChoicesText(),
+		Text:    q.Answer,
+		Choices: q.getChoicesText(),
 	}
 }

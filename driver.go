@@ -1,19 +1,19 @@
 package faq
 
 type Driver struct {
-	rootQuestion Question
-	backCmd      string
-	repeatCmd    string
-	resetCmd     string
+	RootQuestion Question
+	BackCmd      string
+	RepeatCmd    string
+	ResetCmd     string
 	stack        Stack
 }
 
 func NewDriver(rootQuestion Question, backCmd string, repeatCmd string, resetCmd string) Driver {
 	d := Driver{
-		rootQuestion: rootQuestion,
-		backCmd:      backCmd,
-		repeatCmd:    repeatCmd,
-		resetCmd:     resetCmd,
+		RootQuestion: rootQuestion,
+		BackCmd:      backCmd,
+		RepeatCmd:    repeatCmd,
+		ResetCmd:     resetCmd,
 		stack:        NewStack(),
 	}
 
@@ -23,7 +23,7 @@ func NewDriver(rootQuestion Question, backCmd string, repeatCmd string, resetCmd
 }
 
 func (d *Driver) getCommandChoices() []string {
-	choices := []string{d.backCmd, d.repeatCmd, d.resetCmd}
+	choices := []string{d.BackCmd, d.RepeatCmd, d.ResetCmd}
 
 	return choices
 }
@@ -37,23 +37,23 @@ func (d *Driver) PreviousQuestion() interface{} {
 }
 
 func (d *Driver) Boot() Reply {
-	return d.rootQuestion.Reply()
+	return d.RootQuestion.Reply()
 }
 
 func (d *Driver) Ask(cmd string) interface{} {
 	switch cmd {
-	case d.backCmd:
+	case d.BackCmd:
 		return d.Back()
-	case d.repeatCmd:
+	case d.RepeatCmd:
 		return d.Repeat()
-	case d.resetCmd:
+	case d.ResetCmd:
 		return d.Reset()
 	}
 
 	q, ok := d.CurrentQuestion().(Question)
 
 	if !ok {
-		return Reply{text: "Answer is not available"}
+		return Reply{Text: "Answer is not available"}
 	}
 
 	nextQ, _ := q.Ask(cmd).(Question)
@@ -61,8 +61,8 @@ func (d *Driver) Ask(cmd string) interface{} {
 
 	if !nextQ.HasChoices() {
 		return Reply{
-			text:    nextQ.answer,
-			choices: d.getCommandChoices(),
+			Text:    nextQ.Answer,
+			Choices: d.getCommandChoices(),
 		}
 	}
 
@@ -84,7 +84,7 @@ func (d *Driver) Repeat() Reply {
 
 func (d *Driver) Reset() Reply {
 	d.stack = Stack{}
-	d.stack.Push(d.rootQuestion)
+	d.stack.Push(d.RootQuestion)
 
 	return d.Boot()
 }
